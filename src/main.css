@@ -1,9 +1,88 @@
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'helvetica';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #121213;
   color: white;
 }
+
+/* header styles */
+header {
+	display: flex;
+	width: 95vw;
+	justify-content: space-between;
+	padding: 0 2vw;
+	margin: 0;
+	align-items: center;
+	font-size: 25px;
+}
+
+header .sidebar {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+header .sidebar .popup {
+	margin: 5px;
+}
+
+/* Popup styles */
+.popup {
+ background-color: #121213;
+}
+
+.popup button {
+	background: #121213;
+	color: inherit;
+	border: none;
+	padding: 0;
+	cursor: pointer;
+	height: 35px;
+}
+
+.popup button img {
+	height: inherit;
+	width: fit-content
+}
+
+.popup-box {
+  position: fixed;
+  background: #00000050;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+}
+
+.box {
+  position: relative;
+  width: 70%;
+  margin: 0 auto;
+  height: auto;
+  max-height: 70vh;
+  margin-top: calc(100vh - 85vh - 20px);
+  background: #121213;
+  border-radius: 4px;
+  padding: 20px;
+  border: 1px solid #999;
+  overflow: auto;
+}
+
+.close-icon {
+  content: 'x';
+  cursor: pointer;
+  position: fixed;
+  right: calc(15% - 30px);
+  top: calc(100vh - 85vh - 33px);
+  background: #ededed;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  line-height: 20px;
+  text-align: center;
+  border: 1px solid #999;
+  font-size: 20px;
+}
+
+/* main styles */
