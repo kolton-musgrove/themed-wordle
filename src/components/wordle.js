@@ -23,15 +23,15 @@ export default function Wordle() {
 
 		if (acceptableKeys.includes(key)) {
 			switch (key) {
-				case 'enter':
+				case 'enter': // if the user presses the "enter" key
 					submitGuess()
 					return
 
-				case 'backspace':
+				case 'backspace': // if the user presses the "backspace" key
 					eraseCharacter()
 					return
 
-				default: enterCharacter(key)
+				default: enterCharacter(key) // if the user has pressed any of the other "acceptedKeys"
 			}
 		}
 	}
