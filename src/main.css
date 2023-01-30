@@ -86,3 +86,13 @@ header .sidebar .popup {
 }
 
 /* main styles */
+main {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.word {
+	display: flex;
+	flex-direction: row;
+}
