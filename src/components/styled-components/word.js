@@ -1,9 +1,11 @@
 import styled from "styled-components";
 
 export const Word = styled.div`
-	width: 100%;
+	display: flex;
+	flex-direction: row;
+	padding: 2px 0;
 
-	display: grid;
-	grid-template-columns: repeat(5, 1fr);
-	grid-gap: 5px
+	@media only screen and (min-width: 768px) and (min-height: 620px) {
+		padding: 3px 0;
+	}
 `
