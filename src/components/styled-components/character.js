@@ -1,15 +1,21 @@
 import styled from "styled-components";
 
 export const Character = styled.div`
-  font-size: 1.5em;
-  margin: 5px;
-  padding: 5px;
-  height: 28px;
-  width: 22px;
-  text-align: center;
-  text-transform: uppercase;
-  border: 2px white solid;
-  border-radius: 8px;
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+
+	width: 22px;
+	height: 28px;
+	padding: 5px;
+	margin: 5px;
+
+	border: 2px solid #3a3a3c;
+	font-size: 3.2rem;
+	font-weight: bold;
+	line-height: 3.2rem;
+	text-align: center;
+	text-transform: uppercase;
 
   ${({ marker }) => {
 		if (marker === "green") {
@@ -23,5 +29,5 @@ export const Character = styled.div`
 		}
 	}}
 
-  user-select: none;
+	user-select: none;
 `

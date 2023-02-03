@@ -1,5 +1,5 @@
 body {
-  font-family: 'helvetica';
+  font-family: "helvetica";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #121213;
@@ -7,43 +7,27 @@ body {
 }
 
 /* header styles */
-header {
-	display: flex;
-	width: 95vw;
-	justify-content: space-between;
-	padding: 0 2vw;
-	margin: 0;
-	align-items: center;
-	font-size: 25px;
-}
-
-header .sidebar {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-
 header .sidebar .popup {
-	margin: 5px;
+  margin: 5px;
 }
 
 /* Popup styles */
 .popup {
- background-color: #121213;
+  background-color: #121213;
 }
 
 .popup button {
-	background: #121213;
-	color: inherit;
-	border: none;
-	padding: 0;
-	cursor: pointer;
-	height: 35px;
+  background: #121213;
+  color: inherit;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  height: 35px;
 }
 
 .popup button img {
-	height: inherit;
-	width: fit-content
+  height: inherit;
+  width: fit-content;
 }
 
 .popup-box {
@@ -70,7 +54,7 @@ header .sidebar .popup {
 }
 
 .close-icon {
-  content: 'x';
+  content: "x";
   cursor: pointer;
   position: fixed;
   right: calc(15% - 30px);
@@ -83,43 +67,4 @@ header .sidebar .popup {
   text-align: center;
   border: 1px solid #999;
   font-size: 20px;
-}
-
-/* main styles */
-main {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-}
-
-.word {
-	display: flex;
-	flex-direction: row;
-}
-
-.letter {
-  font-size: 1.5em;
-  margin: 5px;
-  padding: 5px;
-  height: 28px;
-  width: 22px;
-  text-align: center;
-  text-transform: uppercase;
-  border: 2px white solid;
-  border-radius: 8px;
-}
-
-div::marker green {
-  color: green;
-  border-color: green;
-}
-
-marker grey {
-  color: grey;
-  border-color: grey;
-}
-
-.marker yellow {
-  color: yellow;
-  border-color: yellow;
 }

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Character } from './styled-components'
+import { Character, Main, Title, Word } from './styled-components'
 
 // because JS stores subarrays by reference, we need to have different starting references
 const blankBoard = Array(6).fill(0).map(() => new Array(5).fill(""))
@@ -117,24 +117,23 @@ export default function Wordle() {
 	}
 
 	return (
-		<main>
-			<h1>Wordle</h1>
-
+		<Main>
 			{board.map((word, _wordIndex) => {
 				return (
-					<div className='word' key={_wordIndex}>{
+					<Word key={_wordIndex}>{
 						word.map((char, _charIndex) => {
 							return (
-								<Character className='letter' key={_charIndex} marker={markers[_wordIndex][_charIndex]}>
+								<Character key={_charIndex} marker={markers[_wordIndex][_charIndex]
+								}>
 									{char}
 								</Character>
 							)
 						})
 					}
-					</div>
+					</Word>
 				)
 			})}
 
-		</main>
+		</Main >
 	)
 }
