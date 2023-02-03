@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Character } from './styled-components'
 
-// because JS stores subarrays by reference, we need to have different starting references
 const blankBoard = Array(6).fill(0).map(() => new Array(5).fill(""))
 const blankMarkers = Array(6).fill(0).map(() => new Array(5).fill(""))
 const acceptableKeys = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'enter', 'backspace']
@@ -24,31 +23,26 @@ export default function Wordle() {
 
 		if (acceptableKeys.includes(key)) {
 			switch (key) {
-				case 'enter': // if the user presses the "enter" key
+				case 'enter':
 					submitGuess()
 					return
 
-				case 'backspace': // if the user presses the "backspace" key
+				case 'backspace':
 					eraseCharacter()
 					return
 
-				default: enterCharacter(key) // if the user has pressed any of the other "acceptedKeys"
+				default: enterCharacter(key)
 			}
 		}
 	}
 
 	const submitGuess = () => {
-		// ensure that you're at the end of a guess
 		if (charIndex === 5) {
-			updateMarkers() // update the "markers" for each character inthe guessed word
+			updateMarkers()
 
-			// check to see if the markers of the current guess are all "green".
 			if (isWordCorrect()) { win(); return }
-
-			// if this is the last guess, lose
 			if (wordIndex === 5) { lose(); return }
 
-			// move on to the next guess
 			setWordIndex(wordIndex + 1)
 			setCharIndex(0)
 		}
@@ -60,16 +54,11 @@ export default function Wordle() {
 		const updatedMarkers = markers
 
 		guessedWord.forEach((guessedCharacter, guessedCharacterIndex) => {
-			// if the guessedCharacter is the correct letter and in the correct location
 			if (guessedCharacter === correctWord[guessedCharacterIndex]) {
 				updatedMarkers[wordIndex][guessedCharacterIndex] = "green"
-				correctWord[guessedCharacterIndex] = "" // we remove this to prevent erroneous "yellow" markers
-
-				// if the guessedCharacter is the correct letter, but in the wrong location
+				correctWord[guessedCharacterIndex] = ""
 			} else if (correctWord.includes(guessedCharacter)) {
 				updatedMarkers[wordIndex][guessedCharacterIndex] = "yellow"
-
-				// else the guessedCharater is not in the word
 			} else {
 				updatedMarkers[wordIndex][guessedCharacterIndex] = "grey"
 			}
@@ -83,6 +72,7 @@ export default function Wordle() {
 	}
 
 	const win = () => {
+		setCharIndex(charIndex - 1)
 		document.removeEventListener("keydown", handleKeyDown)
 		console.log("YOU WON!")
 	}
