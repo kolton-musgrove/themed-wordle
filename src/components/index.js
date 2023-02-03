@@ -1,5 +1,5 @@
 import Popup from "./popup";
 import Wordle from "./wordle";
-import Header from "./header";
+import HeaderSection from "./header";
 
-export { Popup, Wordle, Header }
+export { Popup, Wordle, HeaderSection }

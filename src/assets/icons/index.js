@@ -1,5 +1,5 @@
-import helpIcon from './help.png'
-import settingsIcon from './settings.png'
-import statisticsIcon from './statistics.png'
+import helpIcon from './help.svg'
+import settingsIcon from './settings.svg'
+import statisticsIcon from './statistics.svg'
 
 export { helpIcon, settingsIcon, statisticsIcon }

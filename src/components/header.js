@@ -1,12 +1,15 @@
 import React from 'react'
 import Popup from './popup'
 import { helpIcon, settingsIcon, statisticsIcon } from '../assets/icons'
+import { Header, Title, HeaderIcons } from './styled-components'
+import { WordleExample } from '../assets/images'
+import '../main.css'
 
-export default function Header() {
+export default function HeaderSection() {
 	return (
-		<header>
-			<p>Themed Wordle</p>
-			<div className='sidebar'>
+		<Header>
+			<Title>Themed Wordle</Title>
+			<HeaderIcons>
 				<Popup icon={helpIcon}>
 					<h1>How to Play</h1>
 					<h2>Guess the Wordle in 6 tries.</h2>
@@ -15,12 +18,12 @@ export default function Header() {
 						<li>The color of the tiles will change to show how close your guess was to the word.</li>
 					</ul>
 					<h2>Examples</h2>
-					{/* Exmple image 1 */}
-					<p><strong>W</strong> is in the word and in the correct spot.</p>
-					{/* Example image 2 */}
-					<p><string>I</string> is in the word but in the wrong spot.</p>
-					{/* Example image 3 */}
-					<p><string>U</string> is not in the word in any spot.</p>
+					<img src={WordleExample} alt="example" />
+					<p><strong>S</strong> is in the word and in the correct spot.</p>
+					<img src={WordleExample} alt="example" />
+					<p><strong>A</strong> is in the word but in the wrong spot.</p>
+					<img src={WordleExample} alt="example" />
+					<p><strong>L</strong> is not in the word in any spot.</p>
 					<hr />
 					<p>A new puzzle in released daily at midnight.</p>
 				</Popup>
@@ -48,7 +51,7 @@ export default function Header() {
 						<p>Puzzle Number: </p>
 					</footer>
 				</Popup>
-			</div>
-		</header>
+			</HeaderIcons>
+		</Header>
 	)
 }
