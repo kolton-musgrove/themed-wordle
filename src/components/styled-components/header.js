@@ -4,13 +4,9 @@ export const Header = styled.header`
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	height: 50px;
+	
+	height: 15vh;
 	width: 100%;
 
 	border-bottom: 1px solid #3a3a3c;
-
-	font-weight: 700;
-	font-size: 3.6rem;
-	letter-spacing: 0.2rem;
-	text-transform: uppercase;
 `

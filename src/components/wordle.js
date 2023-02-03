@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Character, Main, Title, Word } from './styled-components'
+import { Character, Main, Word, Board } from './styled-components'
 
 const blankBoard = Array(6).fill(0).map(() => new Array(5).fill(""))
 const blankMarkers = Array(6).fill(0).map(() => new Array(5).fill(""))
@@ -108,21 +108,23 @@ export default function Wordle() {
 
 	return (
 		<Main>
-			{board.map((word, _wordIndex) => {
-				return (
-					<Word key={_wordIndex}>{
-						word.map((char, _charIndex) => {
-							return (
-								<Character key={_charIndex} marker={markers[_wordIndex][_charIndex]
-								}>
-									{char}
-								</Character>
-							)
-						})
-					}
-					</Word>
-				)
-			})}
+			<Board>
+				{board.map((word, _wordIndex) => {
+					return (
+						<Word key={_wordIndex}>{
+							word.map((char, _charIndex) => {
+								return (
+									<Character key={_charIndex} marker={markers[_wordIndex][_charIndex]
+									}>
+										{char}
+									</Character>
+								)
+							})
+						}
+						</Word>
+					)
+				})}
+			</Board>
 
 		</Main >
 	)
