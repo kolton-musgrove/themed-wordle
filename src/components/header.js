@@ -1,12 +1,13 @@
 import React from 'react'
 import Popup from './popup'
 import { helpIcon, settingsIcon, statisticsIcon } from '../assets/icons'
+import { Header, Title, HeaderIcons } from './styled-components'
 
-export default function Header() {
+export default function HeaderSection() {
 	return (
-		<header>
-			<p>Themed Wordle</p>
-			<div className='sidebar'>
+		<Header>
+			<Title>Themed Wordle</Title>
+			<HeaderIcons>
 				<Popup icon={helpIcon}>
 					<h1>How to Play</h1>
 					<h2>Guess the Wordle in 6 tries.</h2>
@@ -48,7 +49,7 @@ export default function Header() {
 						<p>Puzzle Number: </p>
 					</footer>
 				</Popup>
-			</div>
-		</header>
+			</HeaderIcons>
+		</Header>
 	)
 }
