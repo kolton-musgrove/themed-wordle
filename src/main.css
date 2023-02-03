@@ -96,3 +96,30 @@ main {
 	display: flex;
 	flex-direction: row;
 }
+
+.letter {
+  font-size: 1.5em;
+  margin: 5px;
+  padding: 5px;
+  height: 28px;
+  width: 22px;
+  text-align: center;
+  text-transform: uppercase;
+  border: 2px white solid;
+  border-radius: 8px;
+}
+
+div::marker green {
+  color: green;
+  border-color: green;
+}
+
+marker grey {
+  color: grey;
+  border-color: grey;
+}
+
+.marker yellow {
+  color: yellow;
+  border-color: yellow;
+}
