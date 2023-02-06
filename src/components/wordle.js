@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import { Character, Main, Word, Board } from './styled-components'
+import { Character, Main, Word, Board, KeyboardSection, KeyboardRow, KeyboardButton, Flex } from './styled-components'
+import { backspaceIcon } from '../assets/icons'
 
 const blankBoard = Array(6).fill(0).map(() => new Array(5).fill(""))
 const blankMarkers = Array(6).fill(0).map(() => new Array(5).fill(""))
-const acceptableKeys = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'enter', 'backspace']
+const keyboard = [
+	['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'],
+	['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'],
+	['enter', 'z', 'x', 'c', 'v', 'b', 'n', 'm', 'backspace']
+]
+const acceptableKeys = keyboard.flat()
 const wordOfTheDay = "hello"
 
 export default function Wordle() {
@@ -125,6 +131,20 @@ export default function Wordle() {
 					)
 				})}
 			</Board>
+
+			<KeyboardSection>
+				{keyboard.map((keys, keyboardRowIndex) => {
+					return <KeyboardRow key={keyboardRowIndex}>
+						{keyboardRowIndex == 1 && <Flex item={0.5} />}
+						{keys.map((key) => {
+							return <KeyboardButton key={key} onClick={() => handleKeyDown({ key })} flex={["enter", "backspace"].includes(key) ? 1.5 : 1}>
+								{key === "backspace" ? <backspaceIcon /> : key}
+							</KeyboardButton>
+						})}
+						{keyboardRowIndex == 1 && <Flex item={0.5} />}
+					</KeyboardRow>
+				})}
+			</KeyboardSection>
 
 		</Main >
 	)
