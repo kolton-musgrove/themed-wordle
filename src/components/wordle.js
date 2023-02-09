@@ -135,13 +135,13 @@ export default function Wordle() {
 			<KeyboardSection>
 				{keyboard.map((keys, keyboardRowIndex) => {
 					return <KeyboardRow key={keyboardRowIndex}>
-						{keyboardRowIndex == 1 && <Flex item={0.5} />}
+						{keyboardRowIndex === 1 && <Flex item={0.5} />}
 						{keys.map((key) => {
 							return <KeyboardButton key={key} onClick={() => handleKeyDown({ key })} flex={["enter", "backspace"].includes(key) ? 1.5 : 1}>
 								{key === "backspace" ? <backspaceIcon /> : key}
 							</KeyboardButton>
 						})}
-						{keyboardRowIndex == 1 && <Flex item={0.5} />}
+						{keyboardRowIndex === 1 && <Flex item={0.5} />}
 					</KeyboardRow>
 				})}
 			</KeyboardSection>
