@@ -12,17 +12,14 @@ const keyboard = [
 const acceptableKeys = keyboard.flat()
 const wordOfTheDay = "hello"
 
-const checkWord = async (word) => {
-	const response = await fetch('https://api.dictionaryapi.dev/api/v2/entries/en/' + word, { method: 'GET' })
-
-	if (response.status === 200) {
-		response.json()
-		console.log("response.json(): ", response)
-		return Array.isArray(response) ? true : false
-	} else {
-		return Promise.reject(response.status)
-	}
-}
+const fetchWord = (word) => {
+	return fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`, {
+		method: "GET",
+	})
+		.then((res) => res.json())
+		.then((res) => res)
+		.catch((err) => console.log("err:", err));
+};
 
 
 export default function Wordle() {
@@ -56,8 +53,8 @@ export default function Wordle() {
 	}
 
 	const submitGuess = async () => {
-		const word = board[wordIndex].join("")
-		const isValidWord = await checkWord(word)
+		const word = await fetchWord(board[wordIndex].join(""))
+		const isValidWord = Array.isArray(word)
 
 		if (charIndex === 5 && isValidWord) {
 			updateMarkers()
