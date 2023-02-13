@@ -1,117 +1,89 @@
-import React, { useEffect, useState } from 'react'
-import { Character, Main, Word, Board, KeyboardSection, KeyboardRow, KeyboardButton, Flex } from './styled-components'
-import { WordLists } from '../assets'
+import React, { useEffect, useState } from "react"
+import { Character, Main, Word, Board, KeyboardSection, KeyboardRow, KeyboardButton, Flex } from "./styled-components"
+import { Icons, WordLists } from "../assets"
 
 const blankBoard = Array(6).fill(0).map(() => new Array(5).fill(""))
 const blankMarkers = Array(6).fill(0).map(() => new Array(5).fill(""))
 const keyboard = [
-	['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'],
-	['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'],
-	['enter', 'z', 'x', 'c', 'v', 'b', 'n', 'm', 'backspace']
+	["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
+	["a", "s", "d", "f", "g", "h", "j", "k", "l"],
+	["enter", "z", "x", "c", "v", "b", "n", "m", "backspace"]
 ]
 const acceptableKeys = keyboard.flat()
 const wordOfTheDay = "hello"
 
 export default function Wordle() {
+	const [isGameRunning, setisGameRunning] = useState(true)
 	const [board, setBoard] = useState(blankBoard)
 	const [markers, setMarkers] = useState(blankMarkers)
-
 	const [wordIndex, setWordIndex] = useState(0)
 	const [charIndex, setCharIndex] = useState(0)
 
 	useEffect(() => {
 		document.addEventListener("keydown", handleKeyDown)
-		return () => { document.removeEventListener("keydown", handleKeyDown) }
+		return () => document.removeEventListener("keydown", handleKeyDown)
 	})
+
+	const validateWord = (word) => WordLists.validWords.includes(word)
+	const win = () => setisGameRunning(false)
+	const lose = () => setisGameRunning(false)
 
 	const handleKeyDown = ({ key }) => {
 		key = key.toLowerCase()
 
-		if (acceptableKeys.includes(key)) {
+		if (acceptableKeys.includes(key) && isGameRunning) {
 			switch (key) {
-				case 'enter':
+				case "enter":
 					submitGuess()
 					return
 
-				case 'backspace':
+				case "backspace":
 					eraseCharacter()
 					return
 
-				default: enterCharacter(key)
+				default:
+					enterCharacter(key)
 			}
 		}
 	}
 
-	const submitGuess = async () => {
-		const isValidWord = await validateWord(board[wordIndex].join(""))
+	const submitGuess = () => {
+		const guessedWord = board[wordIndex]
+		const isValidWord = validateWord(guessedWord.join(""))
+		const correctWord = wordOfTheDay.split("")
 
 		if (charIndex === 5 && isValidWord) {
-			updateMarkers()
+			// update the color markers on the board
+			const newMarkers = markers.map((word, wi) => wi === wordIndex ? word.map((marker, mi) => {
+				if (guessedWord[mi] === correctWord[mi]) {
+					return "green"
+				} else if (correctWord.includes(guessedWord[mi])) {
+					return "yellow"
+				} else {
+					return "grey"
+				}
+			}) : word)
 
-			if (isWordCorrect()) { win(); return }
-			if (wordIndex === 5) { lose(); return }
+			setMarkers(newMarkers)
+
+			if (newMarkers[wordIndex].every((marker) => marker === "green")) win()
+			if (wordIndex === 5) lose()
 
 			setWordIndex(wordIndex + 1)
 			setCharIndex(0)
 		}
 	}
 
-	const validateWord = (word) => WordLists.validWords.includes(word)
-
-	const updateMarkers = () => {
-		const correctWord = wordOfTheDay.split("")
-		const guessedWord = board[wordIndex]
-		const updatedMarkers = markers
-
-		guessedWord.forEach((guessedCharacter, guessedCharacterIndex) => {
-			if (guessedCharacter === correctWord[guessedCharacterIndex]) {
-				updatedMarkers[wordIndex][guessedCharacterIndex] = "green"
-				correctWord[guessedCharacterIndex] = ""
-			} else if (correctWord.includes(guessedCharacter)) {
-				updatedMarkers[wordIndex][guessedCharacterIndex] = "yellow"
-			} else {
-				updatedMarkers[wordIndex][guessedCharacterIndex] = "grey"
-			}
-		})
-
-		setMarkers(updatedMarkers)
-	}
-
-	const isWordCorrect = () => {
-		return (markers[wordIndex].every((marker) => marker === "green"))
-	}
-
-	const win = () => {
-		setCharIndex(charIndex - 1)
-		document.removeEventListener("keydown", handleKeyDown)
-		console.log("YOU WON!")
-	}
-
-	const lose = () => {
-		document.removeEventListener("keydown", handleKeyDown)
-		console.log("YOU LOST!")
-	}
-
 	const eraseCharacter = () => {
 		if (charIndex > 0) {
-			setBoard((prev) => {
-				const newBoard = prev
-				newBoard[wordIndex][charIndex - 1] = ""
-				return newBoard
-			})
-
+			setBoard((prev) => prev.map((word, wi) => wi === wordIndex ? word.map((char, ci) => ci === charIndex - 1 ? "" : char) : word))
 			setCharIndex(charIndex - 1)
 		}
 	}
 
 	const enterCharacter = (character) => {
 		if (charIndex <= 4) {
-			setBoard((prev) => {
-				const newBoard = prev
-				newBoard[wordIndex][charIndex] = character
-				return newBoard
-			})
-
+			setBoard((prev) => prev.map((word, wi) => wi === wordIndex ? word.map((char, ci) => ci === charIndex ? character : char) : word))
 			setCharIndex(charIndex + 1)
 		}
 	}
@@ -121,16 +93,12 @@ export default function Wordle() {
 			<Board>
 				{board.map((word, _wordIndex) => {
 					return (
-						<Word key={_wordIndex}>{
-							word.map((char, _charIndex) => {
+						<Word key={_wordIndex}>
+							{word.map((char, _charIndex) => {
 								return (
-									<Character key={_charIndex} marker={markers[_wordIndex][_charIndex]
-									}>
-										{char}
-									</Character>
+									<Character key={_charIndex} marker={markers[_wordIndex][_charIndex]}> {char} </Character>
 								)
-							})
-						}
+							})}
 						</Word>
 					)
 				})}
@@ -138,18 +106,26 @@ export default function Wordle() {
 
 			<KeyboardSection>
 				{keyboard.map((keys, keyboardRowIndex) => {
-					return <KeyboardRow key={keyboardRowIndex}>
-						{keyboardRowIndex === 1 && <Flex item={0.5} />}
-						{keys.map((key) => {
-							return <KeyboardButton key={key} onClick={() => handleKeyDown({ key })} flex={["enter", "backspace"].includes(key) ? 1.5 : 1}>
-								{key === "backspace" ? <backspaceIcon /> : key}
-							</KeyboardButton>
-						})}
-						{keyboardRowIndex === 1 && <Flex item={0.5} />}
-					</KeyboardRow>
+					return (
+						<KeyboardRow key={keyboardRowIndex}>
+							{keyboardRowIndex === 1 && <Flex item={0.5} />}
+							{keys.map((key) => {
+								return (
+									<KeyboardButton
+										type="button"
+										title={key}
+										key={key}
+										onClick={() => handleKeyDown({ key })}
+										flex={["enter", "backspace"].includes(key) ? 1.5 : 1}>
+										{key === "backspace" ? (<img alt="delete" src={Icons.deleteIcon} />) : (key)}
+									</KeyboardButton>
+								)
+							})}
+							{keyboardRowIndex === 1 && <Flex item={0.5} />}
+						</KeyboardRow>
+					)
 				})}
 			</KeyboardSection>
-
-		</Main >
+		</Main>
 	)
 }
