@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Character, Main, Word, Board, KeyboardSection, KeyboardRow, KeyboardButton, Flex } from './styled-components'
 import { backspaceIcon } from '../assets/icons'
+import { validWords } from '../assets/word-lists/valid'
 
 const blankBoard = Array(6).fill(0).map(() => new Array(5).fill(""))
 const blankMarkers = Array(6).fill(0).map(() => new Array(5).fill(""))
@@ -12,15 +13,7 @@ const keyboard = [
 const acceptableKeys = keyboard.flat()
 const wordOfTheDay = "hello"
 
-const fetchWord = (word) => {
-	return fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`, {
-		method: "GET",
-	})
-		.then((res) => res.json())
-		.then((res) => res)
-		.catch((err) => console.log("err:", err));
-};
-
+const validateWord = (word) => validWords.includes(word)
 
 export default function Wordle() {
 	const [board, setBoard] = useState(blankBoard)
@@ -53,8 +46,7 @@ export default function Wordle() {
 	}
 
 	const submitGuess = async () => {
-		const word = await fetchWord(board[wordIndex].join(""))
-		const isValidWord = Array.isArray(word)
+		const isValidWord = await validateWord(board[wordIndex].join(""))
 
 		if (charIndex === 5 && isValidWord) {
 			updateMarkers()
