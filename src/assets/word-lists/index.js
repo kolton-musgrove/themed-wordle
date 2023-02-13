@@ -1,3 +1,3 @@
-import { validWords } from './valid'
+import { validWords } from "./valid"
 
 export { validWords }

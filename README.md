@@ -4,12 +4,12 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Setup
 
- 1) Install nvm on your respective system:
+1.  Install nvm on your respective system:
 
-	- [Windows](https://nodejs.org/download/release/v16.19.0/node-v16.19.0-x64.msi)
-	- Linux ([install via NVM](https://github.com/nvm-sh/nvm#installing-and-updating))
+    - [Windows](https://nodejs.org/download/release/v16.19.0/node-v16.19.0-x64.msi)
+    - Linux ([install via NVM](https://github.com/nvm-sh/nvm#installing-and-updating))
 
- 2) Run `npm install` to gather needed packages
+2.  Run `npm install` to gather needed packages
 
 ## Available Scripts
 

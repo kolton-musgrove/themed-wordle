@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "styled-components"
 
 export const KeyboardSection = styled.section`
   height: 200px;
