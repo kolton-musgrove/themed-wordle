@@ -1,8 +1,7 @@
 import React from 'react'
 import Popup from './popup'
-import { helpIcon, settingsIcon, statisticsIcon } from '../assets/icons'
+import { Icons, Images } from '../assets'
 import { Header, Title, HeaderIcons } from './styled-components'
-import { WordleExample } from '../assets/images'
 import '../main.css'
 
 export default function HeaderSection() {
@@ -10,7 +9,7 @@ export default function HeaderSection() {
 		<Header>
 			<Title>Themed Wordle</Title>
 			<HeaderIcons>
-				<Popup icon={helpIcon}>
+				<Popup icon={Icons.helpIcon}>
 					<h1>How to Play</h1>
 					<h2>Guess the Wordle in 6 tries.</h2>
 					<ul>
@@ -18,16 +17,16 @@ export default function HeaderSection() {
 						<li>The color of the tiles will change to show how close your guess was to the word.</li>
 					</ul>
 					<h2>Examples</h2>
-					<img src={WordleExample} alt="example" />
+					<img src={Images.WordleExample} alt="example" />
 					<p><strong>S</strong> is in the word and in the correct spot.</p>
-					<img src={WordleExample} alt="example" />
+					<img src={Images.WordleExample} alt="example" />
 					<p><strong>A</strong> is in the word but in the wrong spot.</p>
-					<img src={WordleExample} alt="example" />
+					<img src={Images.WordleExample} alt="example" />
 					<p><strong>L</strong> is not in the word in any spot.</p>
 					<hr />
 					<p>A new puzzle in released daily at midnight.</p>
 				</Popup>
-				<Popup icon={statisticsIcon}>
+				<Popup icon={Icons.statisticsIcon}>
 					<h3>Statistics</h3>
 					<div>
 						{/* <Stat></Stat> */}
@@ -38,7 +37,7 @@ export default function HeaderSection() {
 					<h3>Guess Distribution</h3>
 					{/* <GuessDistribution></GuessDistribution> */}
 				</Popup>
-				<Popup icon={settingsIcon}>
+				<Popup icon={Icons.settingsIcon}>
 					<h2>Settings</h2>
 					{/* <Setting></Setting> */}
 					{/* <Setting></Setting> */}

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Character, Main, Word, Board, KeyboardSection, KeyboardRow, KeyboardButton, Flex } from './styled-components'
-import { backspaceIcon } from '../assets/icons'
-import { validWords } from '../assets/word-lists/valid'
+import { WordLists } from '../assets'
 
 const blankBoard = Array(6).fill(0).map(() => new Array(5).fill(""))
 const blankMarkers = Array(6).fill(0).map(() => new Array(5).fill(""))
@@ -12,8 +11,6 @@ const keyboard = [
 ]
 const acceptableKeys = keyboard.flat()
 const wordOfTheDay = "hello"
-
-const validateWord = (word) => validWords.includes(word)
 
 export default function Wordle() {
 	const [board, setBoard] = useState(blankBoard)
@@ -58,6 +55,8 @@ export default function Wordle() {
 			setCharIndex(0)
 		}
 	}
+
+	const validateWord = (word) => WordLists.validWords.includes(word)
 
 	const updateMarkers = () => {
 		const correctWord = wordOfTheDay.split("")
