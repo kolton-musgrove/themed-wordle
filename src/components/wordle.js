@@ -13,6 +13,11 @@ export default function Wordle() {
 	const [wordIndex, setWordIndex] = useState(0)
 	const [charIndex, setCharIndex] = useState(0)
 
+	const scienceWords = "../src/assets/word-lists/science.txt"
+	const historyWords = "../src/assets/word-lists/history.txt"
+	const natureWords = "../src/assets/word-lists/nature.txt"
+	const moviesWords = "../src/assets/word-lists/movies.txt"
+
 	useEffect(() => {
 		document.addEventListener("keydown", handleKeyDown)
 		return () => { document.removeEventListener("keydown", handleKeyDown) }
