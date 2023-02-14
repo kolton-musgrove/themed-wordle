@@ -4,7 +4,31 @@ import { Character, Main, Word, Board } from './styled-components'
 const blankBoard = Array(6).fill(0).map(() => new Array(5).fill(""))
 const blankMarkers = Array(6).fill(0).map(() => new Array(5).fill(""))
 const acceptableKeys = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'enter', 'backspace']
-const wordOfTheDay = "hello"
+
+const scienceWords = ['light', 'flask', 'phase', 'scale', 'space']
+const natureWords = ['beach', 'birds', 'cliff', 'cloud', 'coast']
+const historyWords = ['egypt', 'syria', 'kurds', 'roman', 'greek']
+const moviesWords = ['actor', 'alfie', 'alien', 'amour', 'annie']
+
+//start word selection process
+let todaysList = []
+const wordPick = Math.floor(Math.random() * 4)
+switch(wordPick){
+	case 0:
+		todaysList = scienceWords
+		break
+	case 1:
+		todaysList = historyWords
+		break
+	case 2:
+		todaysList = natureWords
+		break
+	case 3:
+		todaysList = moviesWords
+		break
+}
+const wordOfTheDay = todaysList[Math.floor(Math.random() * todaysList.length)]
+//end word selection process
 
 export default function Wordle() {
 	const [board, setBoard] = useState(blankBoard)
@@ -13,14 +37,13 @@ export default function Wordle() {
 	const [wordIndex, setWordIndex] = useState(0)
 	const [charIndex, setCharIndex] = useState(0)
 
-	const scienceWords = "../src/assets/word-lists/science.txt"
-	const historyWords = "../src/assets/word-lists/history.txt"
-	const natureWords = "../src/assets/word-lists/nature.txt"
-	const moviesWords = "../src/assets/word-lists/movies.txt"
+	
 
 	useEffect(() => {
 		document.addEventListener("keydown", handleKeyDown)
 		return () => { document.removeEventListener("keydown", handleKeyDown) }
+
+		
 	})
 
 	const handleKeyDown = ({ key }) => {
