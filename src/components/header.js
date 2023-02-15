@@ -1,15 +1,14 @@
-import React from "react"
-import Popup from "./popup"
-import { Icons, Images } from "../assets"
-import { Header, Title, HeaderIcons } from "./styled-components"
-import "../main.css"
+import React from "react";
+import Popup from "./popup";
+import { Icons, Images } from "../assets";
+import { Header, Title, HeaderIcons } from "./styled-components";
 
 export default function HeaderSection() {
   return (
     <Header>
       <Title>Themed Wordle</Title>
       <HeaderIcons>
-        <Popup icon={Icons.helpIcon} alt="help">
+        <Popup icon={Icons.HelpIcon} alt="help">
           <h1>How to Play</h1>
           <h2>Guess the Wordle in 6 tries.</h2>
           <ul>
@@ -35,7 +34,7 @@ export default function HeaderSection() {
           <hr />
           <p>A new puzzle in released daily at midnight.</p>
         </Popup>
-        <Popup icon={Icons.statisticsIcon} alt="statistics">
+        <Popup icon={Icons.StatisticsIcon} alt="statistics">
           <h3>Statistics</h3>
           <div>
             {/* <Stat></Stat> */}
@@ -46,7 +45,7 @@ export default function HeaderSection() {
           <h3>Guess Distribution</h3>
           {/* <GuessDistribution></GuessDistribution> */}
         </Popup>
-        <Popup icon={Icons.settingsIcon} alt="settings">
+        <Popup icon={Icons.SettingsIcon} alt="settings">
           <h2>Settings</h2>
           {/* <Setting></Setting> */}
           {/* <Setting></Setting> */}
@@ -64,5 +63,5 @@ export default function HeaderSection() {
         </Popup>
       </HeaderIcons>
     </Header>
-  )
+  );
 }

@@ -128,8 +128,7 @@ export default function Wordle() {
                   <Character
                     key={_charIndex}
                     marker={markers[_wordIndex][_charIndex]}>
-                    {" "}
-                    {char}{" "}
+                    {char}
                   </Character>
                 )
               })}
@@ -144,15 +143,17 @@ export default function Wordle() {
             <KeyboardRow key={keyboardRowIndex}>
               {keyboardRowIndex === 1 && <Flex item={0.5} />}
               {keys.map((key) => {
+                const flex = ["enter", "backspace"].includes(key) ? 1.5 : 1
+
                 return (
                   <KeyboardButton
                     type="button"
                     title={key}
                     key={key}
-                    onClick={() => handleKeyDown({ key })}
-                    flex={["enter", "backspace"].includes(key) ? 1.5 : 1}>
+                    style={{ flex }}
+                    onClick={() => handleKeyDown({ key })}>
                     {key === "backspace" ? (
-                      <img alt="delete" src={Icons.deleteIcon} />
+                      <img alt="delete" src={Icons.DeleteIcon} />
                     ) : (
                       key
                     )}

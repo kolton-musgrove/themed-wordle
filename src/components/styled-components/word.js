@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled from "styled-components";
 
 export const Word = styled.div`
   display: flex;
@@ -8,4 +8,4 @@ export const Word = styled.div`
   @media only screen and (min-width: 768px) and (min-height: 620px) {
     padding: 3px 0;
   }
-`
+`;
