@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled from "styled-components";
 
 export const Header = styled.header`
   display: flex;
@@ -10,4 +10,4 @@ export const Header = styled.header`
   border-bottom: 1px solid #3a3a3c;
   margin-bottom: 10px;
   padding: 0 10px;
-`
+`;

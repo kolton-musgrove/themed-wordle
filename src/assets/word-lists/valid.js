@@ -12970,5 +12970,5 @@ export const validWords = [
   "zygal",
   "zygon",
   "zymes",
-  "zymic"
-]
+  "zymic",
+];

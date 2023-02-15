@@ -1,6 +1,7 @@
-import deleteIcon from "./delete.svg"
-import helpIcon from "./help.svg"
-import settingsIcon from "./settings.svg"
-import statisticsIcon from "./statistics.svg"
+import CloseIcon from "./close.svg";
+import DeleteIcon from "./delete.svg";
+import HelpIcon from "./help.svg";
+import SettingsIcon from "./settings.svg";
+import StatisticsIcon from "./statistics.svg";
 
-export { deleteIcon, helpIcon, settingsIcon, statisticsIcon }
+export { CloseIcon, DeleteIcon, HelpIcon, SettingsIcon, StatisticsIcon };

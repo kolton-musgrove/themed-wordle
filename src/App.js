@@ -1,6 +1,5 @@
-import React from "react"
-import { Wordle, HeaderSection } from "./components"
-import "./main.css"
+import React from "react";
+import { Wordle, HeaderSection } from "./components";
 
 function App() {
   return (
@@ -8,7 +7,7 @@ function App() {
       <HeaderSection />
       <Wordle />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

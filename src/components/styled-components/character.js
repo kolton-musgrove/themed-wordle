@@ -11,9 +11,9 @@ export const Character = styled.div`
   height: 3rem;
 
   @media only screen and (min-width: 768px) and (min-height: 620px) {
-    width: 3.75rem;
-    height: 3.75rem;
-    margin: 0 3px;
+    width: 3.65rem;
+    height: 3.65rem;
+    margin: 0 2.5px;
     font-size: 2rem;
   }
 
