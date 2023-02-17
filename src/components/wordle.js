@@ -9,21 +9,56 @@ import {
   KeyboardButton,
   Flex
 } from "./styled-components"
-import { Icons, WordLists } from "../assets"
+import { Icons } from "../assets"
+import { WordLists } from "../assets/word-lists"
+import { ValidWords } from "../assets/word-lists"
 
 const blankBoard = Array(6)
   .fill(0)
   .map(() => new Array(5).fill(""))
+
 const blankMarkers = Array(6)
   .fill(0)
   .map(() => new Array(5).fill(""))
+
 const keyboard = [
   ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
   ["a", "s", "d", "f", "g", "h", "j", "k", "l"],
   ["enter", "z", "x", "c", "v", "b", "n", "m", "backspace"]
 ]
 const acceptableKeys = keyboard.flat()
-const wordOfTheDay = "hello"
+
+const selectWordOfDay = () => {
+  const seedDate = new Date().getDate().toString()
+  const generator = new Math.seedrandom(seedDate)
+  const randomNum = Math.floor((generator() * 10) % WordLists.length)
+
+  const selectTheme = () => {
+    switch (randomNum) {
+      case 0:
+        return { list: WordLists[0], theme: "science" }
+      case 1:
+        return { list: WordLists[1], theme: "history" }
+      case 2:
+        return { list: WordLists[2], theme: "nature" }
+      case 3:
+        return { list: WordLists[3], theme: "movies" }
+      default:
+        return { list: WordLists[4], theme: "random" }
+    }
+  }
+
+  const { list, theme } = selectTheme()
+
+  return {
+    wordOfTheDay: list[Math.floor((generator() * 10) % list.length)],
+    theme: theme
+  }
+}
+
+const { wordOfTheDay, theme } = selectWordOfDay()
+console.log(wordOfTheDay)
+console.log(theme)
 
 export default function Wordle() {
   const [isGameRunning, setisGameRunning] = useState(true)
@@ -37,7 +72,7 @@ export default function Wordle() {
     return () => document.removeEventListener("keydown", handleKeyDown)
   })
 
-  const validateWord = (word) => WordLists.validWords.includes(word)
+  const validateWord = (word) => ValidWords.includes(word)
   const win = () => setisGameRunning(false)
   const lose = () => setisGameRunning(false)
 

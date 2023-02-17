@@ -1,0 +1,21 @@
+export const science = [
+  "light",
+  "flask",
+  "phase",
+  "scale",
+  "space",
+  "hertz",
+  "joule",
+  "tesla",
+  "fluid",
+  "force",
+  "light",
+  "lipid",
+  "biome",
+  "cycle",
+  "toxin",
+  "organ",
+  "xylem",
+  "bases",
+  "study"
+]
