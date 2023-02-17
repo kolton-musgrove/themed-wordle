@@ -9,7 +9,9 @@ import {
   KeyboardButton,
   Flex
 } from "./styled-components"
-import { Icons, WordLists } from "../assets"
+import { Icons } from "../assets"
+import { WordLists } from "../assets/word-lists"
+import { ValidWords } from "../assets/word-lists"
 
 const blankBoard = Array(6)
   .fill(0)
@@ -27,27 +29,36 @@ const keyboard = [
 const acceptableKeys = keyboard.flat()
 
 const selectWordOfDay = () => {
-  Math.seedrandom(new Date().getDate().toString())
+  const seedDate = new Date().getDate().toString()
+  const generator = new Math.seedrandom(seedDate)
+  const randomNum = Math.floor((generator() * 10) % WordLists.length)
 
   const selectTheme = () => {
-    switch (Math.floor(Math.random() * WordLists.length)) {
+    switch (randomNum) {
       case 0:
-        return { list: WordLists.science, theme: "science" }
+        return { list: WordLists[0], theme: "science" }
       case 1:
-        return { list: WordLists.history, theme: "history" }
+        return { list: WordLists[1], theme: "history" }
       case 2:
-        return { list: nature, theme: "nature" }
+        return { list: WordLists[2], theme: "nature" }
       case 3:
-        return { list: movies, theme: "movies" }
+        return { list: WordLists[3], theme: "movies" }
+      default:
+        return { list: WordLists[4], theme: "random" }
     }
   }
 
   const { list, theme } = selectTheme()
 
-  return { word: list[Math.floor(Math.random() * list.length)], theme: theme }
+  return {
+    wordOfTheDay: list[Math.floor((generator() * 10) % list.length)],
+    theme: theme
+  }
 }
 
-const { word, theme } = selectWordOfDay()
+const { wordOfTheDay, theme } = selectWordOfDay()
+console.log(wordOfTheDay)
+console.log(theme)
 
 export default function Wordle() {
   const [isGameRunning, setisGameRunning] = useState(true)
@@ -61,7 +72,7 @@ export default function Wordle() {
     return () => document.removeEventListener("keydown", handleKeyDown)
   })
 
-  const validateWord = (word) => WordLists.validWords.includes(word)
+  const validateWord = (word) => ValidWords.includes(word)
   const win = () => setisGameRunning(false)
   const lose = () => setisGameRunning(false)
 
