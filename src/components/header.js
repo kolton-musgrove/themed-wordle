@@ -1,9 +1,24 @@
 import React from 'react'
 import Popup from './popup'
 import { helpIcon, settingsIcon, statisticsIcon } from '../assets/icons'
-import { Header, Title, HeaderIcons } from './styled-components'
+import { Header, Title, HeaderIcons, GuessDistribution, Stat } from './styled-components'
 import { WordleExample } from '../assets/images'
+import Cookies from 'universal-cookie'
 import '../main.css'
+
+const cookie1 = new Cookies();
+const cookie2 = new Cookies();
+var guesses = [0, 0, 0, 0, 0, 0];
+var stats = [0, 0, 0, 0, 0];
+if (cookie1.get('guesses')) {
+	guesses = cookie1.get('guesses');
+	stats = cookie2.get('stats');
+}
+
+const numWins = stats[0];
+const winPercentage = (stats[0]/(stats[0]+stats[1])) * 100;
+const currStreak = stats[2];
+const bestStreak = stats[3];
 
 export default function HeaderSection() {
 	return (
@@ -30,13 +45,24 @@ export default function HeaderSection() {
 				<Popup icon={statisticsIcon}>
 					<h3>Statistics</h3>
 					<div>
-						{/* <Stat></Stat> */}
-						{/* <Stat></Stat> */}
-						{/* <Stat></Stat> */}
-						{/* <Stat></Stat> */}
+						<Stat>
+							<ul>
+								<li>Number of wins: {numWins}</li>
+								<li>Win Percentage: {winPercentage}%</li>
+								<li>Current Streak: {currStreak}</li>
+								<li>Best Win Streak: {bestStreak}</li>
+							</ul>
+						</Stat>
 					</div>
 					<h3>Guess Distribution</h3>
-					{/* <GuessDistribution></GuessDistribution> */}
+					
+					<GuessDistribution>
+						<ul>
+							{guesses.map((guessNum, guessIndex) => {
+								return <li>{guessIndex +1}: {guessNum}</li>
+							}) }
+						</ul>
+					</GuessDistribution>
 				</Popup>
 				<Popup icon={settingsIcon}>
 					<h2>Settings</h2>

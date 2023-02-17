@@ -12,12 +12,18 @@ const keyboard = [
 ]
 const acceptableKeys = keyboard.flat()
 const wordOfTheDay = "hello"
-const cookies = new Cookies();
-var stats = [0, 0, 0, 0, 0, 0];
+
+const cookie1 = new Cookies();
+const cookie2 = new Cookies();
+var guesses = [0, 0, 0, 0, 0, 0];	// Each index holds the number of wins in a given amount of guesses
+var stats = [0, 0, 0, 0, 0]; 		// [0]: # of wins, [1]: # of loses, [2]: curr streak, [3]: max streak
 var currAttempts = 0;
 
-if (cookies.get('stats')) {
-	stats = cookies.get('stats');
+if (cookie1.get('guesses')) {
+	guesses = cookie1.get('guesses');
+}
+if (cookie2.get('stats')) {
+	stats = cookie2.get('stats');
 }
 
 
@@ -91,34 +97,47 @@ export default function Wordle() {
 	const win = () => {
 		setCharIndex(charIndex - 1)
 		document.removeEventListener("keydown", handleKeyDown)
-		switch(currAttempts) {
+
+		switch(currAttempts) { //incremenet # of wins for given guess
 			case 1:
-				stats[0]++;
+				guesses[0]++;
 				break;
 			case 2:
-				stats[1]++;
+				guesses[1]++;
 				break;
 			case 3:
-				stats[2]++;
+				guesses[2]++;
 				break;
 			case 4:
-				stats[3]++;
+				guesses[3]++;
 				break;
 			case 5:
-				stats[4]++;
+				guesses[4]++;
 				break;
 			case 6:
-				stats[5]++;
+				guesses[5]++;
 				break;
 			default:
 		}
-		cookies.set("stats", stats)
+
+		stats[0]++; //increment # of wins
+		stats[2]++; //increment current win streak
+		cookie1.set("guesses", guesses)
+		cookie2.set("stats", stats)
 		console.log("YOU WON!")
 	}
 
 	const lose = () => {
 		document.removeEventListener("keydown", handleKeyDown)
-		cookies.set("stats", stats)
+
+		stats[1]++; //increment # of loses
+
+		if(stats[2] > stats[3]) {
+			stats[3] = stats[2];
+		}
+		stats[2] = 0;
+
+		cookie2.set("stats", stats)
 		console.log("YOU LOST!")
 	}
 
