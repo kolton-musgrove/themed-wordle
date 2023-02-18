@@ -1,14 +1,14 @@
-import React from 'react'
-import { Wordle, HeaderSection } from './components'
-import './main.css';
+import React from "react"
+import { Wordle, HeaderSection } from "./components"
+import { CookiesProvider } from "react-cookie"
 
 function App() {
 	return (
-		<div>
+		<CookiesProvider>
 			<HeaderSection />
 			<Wordle />
-		</div>
-	);
+		</CookiesProvider>
+	)
 }
 
-export default App;
+export default App

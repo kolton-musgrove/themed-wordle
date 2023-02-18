@@ -1,10 +1,17 @@
-import styled from "styled-components";
+import styled from "styled-components"
 
 export const KeyboardSection = styled.section`
+  position: absolute;
+  bottom: 25px;
   height: 200px;
   width: 100%;
   display: flex;
   flex-direction: column;
+
+  @media only screen and (min-width: 768px) and (min-height: 620px) {
+    position: relative;
+    margin-top: 50px;
+  }
 `
 
 export const KeyboardRow = styled.div`
@@ -17,6 +24,7 @@ export const KeyboardRow = styled.div`
 `
 
 export const KeyboardButton = styled.button`
+  font-family: "Libre Franklin", sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -26,11 +34,12 @@ export const KeyboardButton = styled.button`
   ${({ item }) => (item ? `flex: ${item};` : `flex: 1;`)}
 
   border: 0;
+  font-size: 0.9rem;
   border-radius: 4px;
   background-color: #818384;
   font-weight: bold;
   text-transform: uppercase;
-  color: #d7dadc;
+  color: white;
 
   cursor: pointer;
   user-select: none;
