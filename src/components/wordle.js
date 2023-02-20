@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react"
-import { Character, Main, Word, Board, KeyboardSection, KeyboardRow, KeyboardButton, Flex } from "./styled-components"
+import { Character, Main, Word, PopupClose, Board, Stat, GuessDistribution, KeyboardSection, KeyboardRow, KeyboardButton, Flex } from "./styled-components"
+import Modal from "react-modal"
 import { Icons, WordLists } from "../assets"
 import { useCookies } from "react-cookie"
 
@@ -16,6 +17,31 @@ export default function Wordle() {
 	const [charIndex, setCharIndex] = useState(0)
 	// eslint-disable-next-line
 	const [cookies, setStats, removeStats] = useCookies(["stats"])
+	const [isPopupOpen, setPopupOpen] = useState(false)
+
+	const customStyles = {
+		overlay: {
+			position: "fixed",
+			background: "#00000050",
+			width: "100%",
+			height: "100vh",
+			top: 0,
+			left: 0,
+		},
+		content: {
+			position: "relative",
+			width: "70%",
+			margin: "0 auto",
+			height: "auto",
+			maxHeight: "70vh",
+			marginTop: "calc(100vh - 85vh - 20px)",
+			background: "#121213",
+			borderRadius: "4px",
+			padding: "20px",
+			border: "1px solid #999",
+			overflow: "auto",
+		},
+	}
 
 	const initialStats = { wins: 0, loses: 0, currStreak: 0, maxStreak: 0, previousGames: [0, 0, 0, 0, 0] }
 	if (!cookies.stats) setStats("stats", initialStats, { path: "/" })
@@ -60,8 +86,6 @@ export default function Wordle() {
 		const isValidWord = validateWord(guessedWord.join(""))
 		const correctWord = wordOfTheDay.split("")
 
-		console.log(guessedWord, isValidWord, correctWord)
-
 		if (charIndex === 5 && isValidWord) {
 			// update the color markers on the board
 			const newMarkers = markers.map((word, wi) =>
@@ -93,7 +117,7 @@ export default function Wordle() {
 	const win = () => {
 		setCharIndex(1) // this is a hack to force the board to re-render
 		setisGameRunning(false)
-		console.log("win")
+		setPopupOpen(true)
 
 		const newStats = cookies.stats
 
@@ -107,6 +131,7 @@ export default function Wordle() {
 
 	const lose = () => {
 		setisGameRunning(false)
+		setPopupOpen(true)
 
 		const newStats = cookies.stats
 
@@ -161,6 +186,36 @@ export default function Wordle() {
 					)
 				})}
 			</Board>
+
+			<Modal
+				style={customStyles}
+				isOpen={isPopupOpen}
+				onRequestClose={() => setPopupOpen(false)}
+				transparent={true}>
+				<PopupClose type="button" onClick={() => setPopupOpen(false)}>
+					<img src={Icons.CloseIcon} alt="close" />
+				</PopupClose>
+				<h3>Statistics</h3>
+				<div>
+					<Stat>
+						<p>Number of wins: {cookies.stats.wins}</p>
+						<p>Win Percentage: {(cookies.stats.wins / (cookies.stats.wins + cookies.stats.loses)) * 100 || 0}%</p>
+						<p>Current Streak: {cookies.stats.currStreak}</p>
+						<p>Best Win Streak: {cookies.stats.maxStreak}</p>
+					</Stat>
+				</div>
+				<h3>Guess Distribution</h3>
+
+				<GuessDistribution>
+					<ol>
+						<li>{cookies.stats.previousGames[0]}</li>
+						<li>{cookies.stats.previousGames[1]}</li>
+						<li>{cookies.stats.previousGames[2]}</li>
+						<li>{cookies.stats.previousGames[3]}</li>
+						<li>{cookies.stats.previousGames[4]}</li>
+					</ol>
+				</GuessDistribution>
+			</Modal>
 
 			<KeyboardSection>
 				{keyboard.map((keys, keyboardRowIndex) => {

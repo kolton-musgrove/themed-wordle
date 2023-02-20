@@ -8,6 +8,9 @@ export default function HeaderSection() {
 	// eslint-disable-next-line
 	const [cookies, setStats, removeStats] = useCookies(["stats"])
 
+	const initialStats = { wins: 0, loses: 0, currStreak: 0, maxStreak: 0, previousGames: [0, 0, 0, 0, 0] }
+	if (!cookies.stats) setStats("stats", initialStats, { path: "/" })
+
 	const numWins = cookies.stats.wins
 	const numLosses = cookies.stats.loses
 	const currStreak = cookies.stats.currStreak
@@ -64,11 +67,11 @@ export default function HeaderSection() {
 
 					<GuessDistribution>
 						<ol>
+							<li>{previousGames[0]}</li>
 							<li>{previousGames[1]}</li>
 							<li>{previousGames[2]}</li>
 							<li>{previousGames[3]}</li>
 							<li>{previousGames[4]}</li>
-							<li>{previousGames[5]}</li>
 						</ol>
 					</GuessDistribution>
 				</Popup>
